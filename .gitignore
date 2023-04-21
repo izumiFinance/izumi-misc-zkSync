@@ -1,0 +1,12 @@
+node_modules/*
+.secret.js
+package-lock.json
+yarn.lock
+artifacts/*
+artifacts-zk/*
+cache/*
+cache-zk/*
+.DS_store
+
+test/core/*
+typechain-types/*
