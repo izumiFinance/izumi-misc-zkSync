@@ -23,7 +23,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
 
   // Create deployer object and load the artifact of the contract you want to deploy.
   const deployer = new Deployer(hre, wallet);
-  const contractFactory = await deployer.loadArtifact("TokenWithManagement");
+  const contractFactory = await deployer.loadArtifact("SharedLiquidityToken");
 
   const args = [
     tokenName, tokenSymbol, tokenDecimal, amount
