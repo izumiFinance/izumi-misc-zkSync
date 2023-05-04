@@ -2,7 +2,7 @@ import { Wallet, Provider, utils } from "zksync-web3";
 import * as ethers from "ethers";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { Deployer } from "@matterlabs/hardhat-zksync-deploy";
-
+import { BigNumber } from "bignumber.js";
 import { sk } from "../../.secret"
 
 export default async function (hre: HardhatRuntimeEnvironment) {
@@ -10,6 +10,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   const tokenName = process.env.TOKEN_NAME
   const tokenSymbol = process.env.TOKEN_SYMBOL
   const tokenDecimal = process.env.TOKEN_DECIMAL
+  const amount = new BigNumber(process.env.AMOUNT).times(10 ** Number(tokenDecimal)).toFixed(0)
   const fee = Number(process.env.FEE)
   console.log('name: ', tokenName)
   console.log('tokenSymbol: ', tokenSymbol)
@@ -25,7 +26,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   const contractFactory = await deployer.loadArtifact("TokenWithManagement");
 
   const args = [
-    tokenName, tokenSymbol, tokenDecimal
+    tokenName, tokenSymbol, tokenDecimal, amount
   ]
   console.log('args: ', args)
   const deploymentFee = await deployer.estimateDeployFee(contractFactory, args);
