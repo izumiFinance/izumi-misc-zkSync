@@ -7,6 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract TokenWithManagement is ERC20, Ownable {
     uint8 decimal;
     mapping(address => bool) public blackList;
+    bool public pause;
 
     constructor(string memory _name, string memory _symbol, uint8 _decimal, uint256 amount)
         ERC20(_name, _symbol)
@@ -23,23 +24,20 @@ contract TokenWithManagement is ERC20, Ownable {
         return decimal;
     }
 
-    function banAccount(address account) external onlyOwner {
+    function pauseAccount(address account) external onlyOwner {
         blackList[account] = true;
     }
-    function banAccounts(address[] calldata accounts) external onlyOwner {
-        for (uint256 i = 0; i < accounts.length; i ++) {
-            blackList[accounts[i]] = true;
-        }
-    }
 
-    function freeAccount(address account) external onlyOwner {
+    function unpauseAccount(address account) external onlyOwner {
         delete blackList[account];
     }
 
-    function freeAccounts(address[] calldata accounts) external onlyOwner {
-        for (uint256 i = 0; i < accounts.length; i ++) {
-            delete blackList[accounts[i]];
-        }
+    function pauseTransfer() external onlyOwner {
+        pause = true;
+    }
+
+    function unpauseTransfer() external onlyOwner {
+        pause = false;
     }
 
     function _beforeTokenTransfer(
@@ -47,6 +45,7 @@ contract TokenWithManagement is ERC20, Ownable {
         address to,
         uint256
     ) internal view override {
+        require(!pause, "paused!");
         require(!blackList[from], "from is baned!");
         require(!blackList[to], "to is baned!");
     }
