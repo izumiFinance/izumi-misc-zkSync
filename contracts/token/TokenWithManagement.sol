@@ -8,10 +8,10 @@ contract TokenWithManagement is ERC20, Ownable {
     uint8 decimal;
     mapping(address => bool) public blackList;
 
-    constructor(string memory _name, string memory _symbol, uint8 _decimal)
+    constructor(string memory _name, string memory _symbol, uint8 _decimal, uint256 amount)
         ERC20(_name, _symbol)
     {
-        _mint(msg.sender, 1000000000000000000000000000000);
+        _mint(msg.sender, amount);
         decimal=_decimal;
     }
 
