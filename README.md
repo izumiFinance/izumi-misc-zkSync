@@ -49,7 +49,7 @@ $ npx hardhat compile
 ##### 4. deploy SharedLiquidityToken
 
 ```
-$ FEE=0.08 CONTRACT_NAME=SharedLiquidityToken yarn hardhat deploy-zksync --script deploy/token/deployContractNoParam.ts
+$ FEE=0.08 TOKEN_NAME='token name' TOKEN_SYMBOL='token Symbol' TOKEN_DECIMAL=18 AMOUNT=1000000000 yarn hardhat deploy-zksync --script deploy/token/deployTokenWithManagement.ts
 ```
 
 `FEE` is `max-gas-fee` you want to pay, you can set arbitrary value, `CONTRACT_NAME` specify the name of contract in this example `SharedLiquidityToken`.
@@ -57,8 +57,23 @@ $ FEE=0.08 CONTRACT_NAME=SharedLiquidityToken yarn hardhat deploy-zksync --scrip
 
 ##### 5. verify
 
+first, save the constructor args into a js file, we can name it arbitrarily, suppose we name it as 'args.js'
+
+in this example, the content of 'args.js' is following
+
 ```
-$ yarn hardhat verify --network zkSyncMainnet 0x.....
+module.exports=[
+    'token name',
+    'token Symbol',
+    18,
+    '1000000000000000000000000000', // 1000000000 * 10**18
+]
+```
+
+then use following command to verify
+
+```
+$ yarn hardhat verify --network zkSyncMainnet --constructor-args args.js 0x.....
 ```
 
 here `0x.....` is address of deployed token.
