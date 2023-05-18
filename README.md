@@ -36,7 +36,17 @@ then, edit `.secret.js` file and fill the `sk` field and `apiKey` field.
 
 `sk` is your private key for deployment. `apiKey` is used if you want to verify your contract.
 
-##### 3. deploy SharedLiquidityToken
+
+##### 3. compile
+```
+$ yarn hardhat compile
+```
+or
+```
+$ npx hardhat compile
+```
+
+##### 4. deploy SharedLiquidityToken
 
 ```
 $ FEE=0.08 CONTRACT_NAME=SharedLiquidityToken yarn hardhat deploy-zksync --script deploy/token/deployContractNoParam.ts
@@ -45,7 +55,7 @@ $ FEE=0.08 CONTRACT_NAME=SharedLiquidityToken yarn hardhat deploy-zksync --scrip
 `FEE` is `max-gas-fee` you want to pay, you can set arbitrary value, `CONTRACT_NAME` specify the name of contract in this example `SharedLiquidityToken`.
 
 
-##### 4. verify
+##### 5. verify
 
 ```
 $ yarn hardhat verify --network zkSyncMainnet 0x.....
