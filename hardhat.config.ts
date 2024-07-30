@@ -46,7 +46,7 @@ const config: HardhatUserConfig = {
     },
   },
   solidity: {
-    version: "0.8.16",
+    version: "0.8.18",
   },
 };
 
