@@ -20,14 +20,15 @@ const config: HardhatUserConfig = {
       zksync: true,
       verifyURL: 'https://explorer.zklink.io/contract_verification',
     },
-    zkSyncTestnet: {
-      url: "https://testnet.era.zksync.dev",
-      ethNetwork: "goerli", // RPC URL of the network (e.g. `https://goerli.infura.io/v3/<API_KEY>`)
+    zkSyncSepoliaTestnet: {
+      url: "https://sepolia.era.zksync.dev",
+      ethNetwork: "sepolia",
       zksync: true,
+      verifyURL: "https://explorer.sepolia.era.zksync.dev/contract_verification",
     },
     zkSyncMainnet: {
-      url: "https://zksync2-mainnet.zksync.io",
-      ethNetwork: "https://mainnet.infura.io/v3/",
+      url: "https://mainnet.era.zksync.io",
+      ethNetwork: "mainnet",
       zksync: true,
       verifyURL: "https://zksync2-mainnet-explorer.zksync.io/contract_verification",
     },
