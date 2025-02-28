@@ -6,7 +6,7 @@ import "@matterlabs/hardhat-zksync-solc";
 import "@matterlabs/hardhat-zksync-verify";
 
 const config: HardhatUserConfig = {
-  defaultNetwork: "zklinkNova",
+  defaultNetwork: "zkSyncSepoliaTestnet",
   networks: {
     zklinkNovaTestnet: {
       url: "https://goerli.rpc.zklink.io",
